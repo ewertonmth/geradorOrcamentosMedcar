@@ -14,24 +14,81 @@
         </div>
     </header>
 
-    <section id="cliente">
-        <h2>Dados do Cliente</h2>
-            <form action="">
-                <div class="input-container">
-                    <input type="text" id="nome_cliente" name="nome_cliente" required>
-                    <label for="nome_cliente"><span>Nome do Cliente</span></label>
-                  </div>
-                  
-                  <div class="input-container">
-                    <input type="text" id="cnpj_cliente" name="cnpj_cliente" pattern="\d{14}" title="CNPJ deve conter 14 dígitos" required>
-                    <label for="cnpj_cliente"><span>CNPJ do Cliente</span></label>
-                  </div>
-                  
-                  <div class="input-container">
-                    <input type="tel" id="telefone_cliente" name="telefone_cliente" required>
-                    <label for="telefone_cliente"><span>Número do cliente</span></label>
-                  </div>
-            </form>
-    </section>
+    <main>
+        <section id="cliente">
+            <h2>Dados do Cliente</h2>
+                <form id="form-cliente">
+                    <div class="input-container">
+                        <input type="text" id="nome_cliente" name="nome_cliente" required>
+                        <label for="nome_cliente"><span>Nome do Cliente</span></label>
+                    </div>
+                    
+                    <div class="input-container">
+                        <input type="text" id="cnpj_cliente" name="cnpj_cliente" pattern="\d{14}" title="CNPJ deve conter 14 dígitos" required>
+                        <label for="cnpj_cliente"><span>CNPJ do Cliente</span></label>
+                    </div>
+                    
+                    <div class="input-container">
+                        <input type="tel" id="telefone_cliente" name="telefone_cliente" required>
+                        <label for="telefone_cliente"><span>Número do cliente</span></label>
+                    </div>
+                </form>
+        </section>
+
+        <section id="itens">
+            <h2>Itens do Orçamento</h2>
+                <form id="form-itens">
+                    <div class="input-container">
+                        <input type="text" id="nome_item" name="nome_item" required>
+                        <label for="nome_item"><span>Nome do Item</span></label>
+                    </div>
+                    
+                    <div class="input-container">
+                        <input type="number" id="quantidade_item" name="quantidade_item" min="0" required>
+                        <label for="quantidade_item"><span>Quantidade do Item</span></label>
+                    </div>
+                    
+                    <div class="input-container">
+                        <input type="text" id="valor_item" name="valor_item" required>
+                        <label for="valor_item"><span>Valor do Item</span></label>
+                    </div>
+
+                    <button class="btn-adicionar">Adicionar Item</button>
+                </form>
+
+                <table>
+                    <thead>
+                        <tr>
+                        <th>Nome do Item</th>
+                        <th>Quantidade</th>
+                        <th>Valor unitário</th>
+                        <th>Total</th>
+                        <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+        </section>
+
+     
+    </main>
+
+<script>
+    const form = document.getElementById('form-itens');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById('nome_item').value;
+        const quantidade = document.getElementById('quantidade_item').value;
+        const valor = document.getElementById('valor_item').value;
+
+        console.log("Nome:", nome);
+        console.log("Quantidade:", quantidade);
+        console.log("Valor:", valor);
+    });
+</script>
+
 </body>
 </html>
