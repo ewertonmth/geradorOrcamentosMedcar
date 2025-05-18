@@ -142,6 +142,11 @@ form {
   margin-bottom: 10px;
 }
 
+.bnts{
+  display: flex;
+  gap: .5rem;
+}
+
 .btn-adicionar{
   display: flex;
   margin: 0 auto;
@@ -162,7 +167,7 @@ form {
   cursor: pointer;
 }
 
-#btn-pdf {
+#btn-pdf, #btn-salvar, #btn-carregar{
   display: flex;
   margin: 0 auto;
   align-items: center;
