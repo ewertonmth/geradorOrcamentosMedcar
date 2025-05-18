@@ -33,6 +33,15 @@
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
+        // Verifica se o CNPJ tem exatamente 14 números
+        const cnpjRaw = document.getElementById('cnpj_cliente').value;
+        const cnpj = cnpjRaw.replace(/\D/g, '');
+
+        if (cnpj.length !== 14) {
+            alert("O CNPJ deve conter exatamente 14 dígitos numéricos.");
+        return;}
+        // (continua normalmente se estiver válido...)
+
         // Captura dos valores
         const nome = document.getElementById('nome_item').value;
         const quantidade = document.getElementById('quantidade_item').value;
@@ -75,56 +84,99 @@
 
     // Gerar PDF
     document.getElementById('btn-pdf').addEventListener('click', async function () {
-        const {jsPDF} = window.jspdf;
+        const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
-        // Dados do orçamento
+        // Logotipo no topo
+        doc.addImage(logoBase64, 'PNG', 160, 10, 30, 30);
+
+        // Cabeçalho do orçamento
+        doc.setFontSize(16);
+        doc.text("Orçamento de Serviços", 20, 20);
+
+        doc.setFontSize(12);
+
         const id = document.getElementById('orcamento-id').textContent;
         const nome = document.getElementById('nome_cliente').value;
-        const cnpj = document.getElementById('cnpj_cliente').value;
+        const cnpjRaw = document.getElementById('cnpj_cliente').value;
         const telefone = document.getElementById('telefone_cliente').value;
         const totalGeral = document.getElementById('total-geral').textContent;
 
-        // Cabeçalho
-        doc.setFontSize(16);
-        doc.text("Orçamento de Serviços", 20, 20);
-        doc.setFontSize(12);
-        doc.text(id, 20, 30);
-        doc.text(`Nome: ${nome}`, 20, 40);
-        doc.text(`CNPJ: ${cnpj}`, 20, 50);
-        doc.text(`Telefone: ${telefone}`, 20, 60);
+        // Formatar CNPJ
+        const cnpjNumeros = cnpjRaw.replace(/\D/g, '');
+        let cnpj = cnpjNumeros;
+        if (cnpj.length === 14) {
+            cnpj = cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+        }
 
-        // Tabela de itens
-        let y = 75;
-        doc.text("Itens:", 20, y);
-        
-        y += 10;
+        // Escrevendo os dados com alinhamento e estilo
         doc.setFont("helvetica", "bold");
-        doc.text("Item", 20, y);
-        doc.text("Qtd", 80, y);
-        doc.text("V. Unitário", 110, y);
-        doc.text("Total", 160, y);
+        doc.text("ID do Orçamento:", 20, 30);
         doc.setFont("helvetica", "normal");
+        doc.text(id, 70, 30);
+
+        doc.setFont("helvetica", "bold");
+        doc.text("Nome:", 20, 40);
+        doc.setFont("helvetica", "normal");
+        doc.text(nome || "-", 70, 40);
+
+        doc.setFont("helvetica", "bold");
+        doc.text("CNPJ:", 20, 50);
+        doc.setFont("helvetica", "normal");
+        doc.text(cnpj || "-", 70, 50);
+
+        doc.setFont("helvetica", "bold");
+        doc.text("Telefone:", 20, 60);
+        doc.setFont("helvetica", "normal");
+        doc.text(telefone || "-", 70, 60);
+
+        // Linha horizontal divisória
+        doc.line(20, 70, 190, 70);
+
+
+        // Construir dados da tabela
+        const colunas = ["Item", "Qtd", "V. Unitário", "Total"];
+        const linhasTabela = [];
 
         const linhas = document.querySelectorAll('#corpo-tabela tr');
         linhas.forEach(function (linha) {
-            const colunas = linha.querySelectorAll('td');
-            const item = colunas[0].textContent;
-            const qtd = colunas[1].textContent;
-            const valorUnit = colunas[2].textContent;
-            const total = colunas[3].textContent;
+            const colunasLinha = linha.querySelectorAll('td');
+            const item = colunasLinha[0].textContent;
+            const qtd = colunasLinha[1].textContent;
+            const valorUnit = colunasLinha[2].textContent;
+            const total = colunasLinha[3].textContent;
 
-            y += 10;
-            doc.text(item, 20, y);
-            doc.text(qtd, 80, y);
-            doc.text(valorUnit, 110, y);
-            doc.text(total, 160, y);
+            linhasTabela.push([item, qtd, valorUnit, total]);
         });
 
-        y += 15;
+        // Gerar tabela com AutoTable
+        doc.autoTable({
+            head: [colunas],
+            body: linhasTabela,
+            startY: 75,
+            theme: 'grid',
+            styles: {
+            fontSize: 10,
+            cellPadding: 3,
+            },
+            headStyles: {
+            fillColor: [0, 123, 255], // azul
+            textColor: 255,
+            halign: 'center',
+            },
+            bodyStyles: {
+            halign: 'center',
+            }
+        });
+
+        // Total geral destacado após a tabela
+        const finalY = doc.lastAutoTable.finalY + 10;
+        doc.setDrawColor(0);
+        doc.setFillColor(240, 240, 240);
+        doc.rect(20, finalY - 6, 80, 8, 'F'); // retângulo de fundo
         doc.setFont("helvetica", "bold");
-        doc.text(totalGeral, 20, y);
+        doc.text(totalGeral, 22, finalY);
 
         // Salvar PDF
         doc.save(`orcamento_${id.replace(/\D/g, "")}.pdf`);
-    })
+        });
