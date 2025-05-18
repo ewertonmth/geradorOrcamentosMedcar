@@ -37,6 +37,7 @@
 
         <section id="itens">
             <h2>Itens do Orçamento</h2>
+            <p id="orcamento-id">ID do Orçamento: </p>
                 <form id="form-itens">
                     <div class="input-container">
                         <input type="text" id="nome_item" name="nome_item" required>
@@ -49,11 +50,11 @@
                     </div>
                     
                     <div class="input-container">
-                        <input type="text" id="valor_item" name="valor_item" required>
+                        <input type="number" id="valor_item" name="valor_item" required>
                         <label for="valor_item"><span>Valor do Item</span></label>
                     </div>
 
-                    <button class="btn-adicionar">Adicionar Item</button>
+                    <button class="btn-adicionar" type="submit">Adicionar Item</button>
                 </form>
 
                 <table>
@@ -66,29 +67,19 @@
                         <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="corpo-tabela">
                     </tbody>
                 </table>
-        </section>
 
-     
+                <p id="total-geral">Total Geral: R$ 0,00</p>
+
+                <div><button id="btn-pdf">Gerar PDF</button></div>
+
+        </section>
     </main>
 
-<script>
-    const form = document.getElementById('form-itens');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const nome = document.getElementById('nome_item').value;
-        const quantidade = document.getElementById('quantidade_item').value;
-        const valor = document.getElementById('valor_item').value;
-
-        console.log("Nome:", nome);
-        console.log("Quantidade:", quantidade);
-        console.log("Valor:", valor);
-    });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="./assets/script/script.js"></script>
 
 </body>
-</html>
+</html> 
