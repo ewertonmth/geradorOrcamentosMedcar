@@ -142,7 +142,27 @@ form {
   margin-bottom: 10px;
 }
 
-.btn-adicionar {
+.btn-adicionar{
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 32px;
+  align-items: center;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: var(--body_color);
+  border: none;
+  cursor: pointer;
+}
+
+#btn-pdf {
   display: flex;
   margin: 0 auto;
   align-items: center;
@@ -161,7 +181,27 @@ form {
   cursor: pointer;
 }
 
-.btn-adicionar::after {
+.remover {
+  max-width: 7rem;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  padding: .75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: .9rem;
+  letter-spacing: .15rem;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: var(--body_color);
+  border: none;
+  cursor: pointer;
+}
+
+button::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -173,7 +213,7 @@ form {
   z-index: -2;
 }
 
-.btn-adicionar::before {
+button::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -186,9 +226,27 @@ form {
   z-index: -1;
 }
 
-.btn-adicionar:hover::before {
+button:hover::before {
   width: 100%;
 }
+
+.corpo-tabela, th, td{
+    max-width: 900px;
+    border-collapse: collapse; /*define a separação entre as bordar*/
+    padding: 10px;
+    text-align: left;
+    border: 1px solid rgb(160 160 160);
+}
+th{
+    background-color: var(--body_color);
+    color: var(--div_color);
+}
+
+#total-geral{
+  margin-top: 16px;
+  margin-bottom: 16px ;
+}
+
 /* ====== MEDIA QUERY ====== */
 @media (max-width: 600px) {
     .input-container {
@@ -197,7 +255,7 @@ form {
 }
 
 @media (max-width: 1100px) {
-  .cabecalho, #cliente, #itens {
+  .cabecalho, #cliente, #itens, .corpo-tabela {
     max-width: 28rem;
   }
 }

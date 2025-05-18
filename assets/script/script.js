@@ -72,6 +72,8 @@
         document.getElementById('valor_item').value = "";
     });
 
+
+    // Gerar PDF
     document.getElementById('btn-pdf').addEventListener('click', async function () {
         const {jsPDF} = window.jspdf;
         const doc = new jsPDF();

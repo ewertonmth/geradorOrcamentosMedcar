@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="shortcut icon" href="./assets/image/favicon--medcar.ico" type="image/x-icon">
     <title>Gerador de Orçamentos</title>
 </head>
 <body>
@@ -19,17 +20,17 @@
             <h2>Dados do Cliente</h2>
                 <form id="form-cliente">
                     <div class="input-container">
-                        <input type="text" id="nome_cliente" name="nome_cliente" required>
+                        <input type="text"  placeholder=" " id="nome_cliente" name="nome_cliente" required>
                         <label for="nome_cliente"><span>Nome do Cliente</span></label>
                     </div>
                     
                     <div class="input-container">
-                        <input type="text" id="cnpj_cliente" name="cnpj_cliente" pattern="\d{14}" title="CNPJ deve conter 14 dígitos" required>
+                        <input type="text"  placeholder=" " id="cnpj_cliente" name="cnpj_cliente"  title="CNPJ deve conter 14 dígitos" required>
                         <label for="cnpj_cliente"><span>CNPJ do Cliente</span></label>
                     </div>
                     
                     <div class="input-container">
-                        <input type="tel" id="telefone_cliente" name="telefone_cliente" required>
+                        <input type="tel"  placeholder=" " id="telefone_cliente" name="telefone_cliente" required>
                         <label for="telefone_cliente"><span>Número do cliente</span></label>
                     </div>
                 </form>
@@ -40,24 +41,24 @@
             <p id="orcamento-id">ID do Orçamento: </p>
                 <form id="form-itens">
                     <div class="input-container">
-                        <input type="text" id="nome_item" name="nome_item" required>
+                        <input type="text"  placeholder=" " id="nome_item" name="nome_item" required>
                         <label for="nome_item"><span>Nome do Item</span></label>
                     </div>
                     
                     <div class="input-container">
-                        <input type="number" id="quantidade_item" name="quantidade_item" min="0" required>
+                        <input type="number"  placeholder=" " id="quantidade_item" name="quantidade_item" min="0" required>
                         <label for="quantidade_item"><span>Quantidade do Item</span></label>
                     </div>
                     
                     <div class="input-container">
-                        <input type="number" id="valor_item" name="valor_item" required>
+                        <input type="number"  placeholder=" " id="valor_item" name="valor_item" required>
                         <label for="valor_item"><span>Valor do Item</span></label>
                     </div>
 
                     <button class="btn-adicionar" type="submit">Adicionar Item</button>
                 </form>
 
-                <table>
+                <table class="corpo-tabela">
                     <thead>
                         <tr>
                         <th>Nome do Item</th>
