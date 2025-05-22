@@ -167,7 +167,7 @@ form {
   cursor: pointer;
 }
 
-#btn-pdf, #btn-salvar, #btn-carregar{
+#btn-pdf{
   display: flex;
   margin: 0 auto;
   align-items: center;
