@@ -1,0 +1,69 @@
+{
+  "name": "orcamentos",
+  "version": "1.0.0",
+  "description": "💼 Gerador de Orçamentos: gere PDFs profissionais e envie ao cliente.",
+  "author": "Grupo Med",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No lint configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewertonmth/geradorOrcamentosMedcar.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ewertonmth/geradorOrcamentosMedcar/issues"
+  },
+  "homepage": "https://github.com/ewertonmth/geradorOrcamentosMedcar#readme",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.8.1",
+    "@electron-forge/maker-deb": "^7.8.1",
+    "@electron-forge/maker-rpm": "^7.8.1",
+    "@electron-forge/maker-squirrel": "^7.8.1",
+    "@electron-forge/maker-zip": "^7.8.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
+    "@electron-forge/plugin-fuses": "^7.8.1",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^36.3.0"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./assets/image/favicon--medcar.ico"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "orcamentos",
+            "authors": "Grupo Med",
+            "description": "Gerador de Orçamentos da Grupo Med",
+            "setupIcon": "./assets/image/favicon--medcar.ico",
+            "setupExe": "instalador-orcamentos.exe"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": ["darwin"]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
